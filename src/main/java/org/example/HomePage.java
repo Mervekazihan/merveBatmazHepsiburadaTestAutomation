@@ -6,8 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
@@ -40,8 +42,6 @@ public class HomePage extends BasePage{
         searchInput.sendKeys(searchValue);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
-        closeCookieWindow();
-
         WebElement searchButton = driver.findElement(searchButtonClassName);
         searchButton.click();
     }
@@ -56,14 +56,13 @@ public class HomePage extends BasePage{
     }
 
     public void switchToProductTab() {
-        wait.until(numberOfWindowsToBe(2));
-        String originalWindow = driver.getWindowHandle();
-        for (String windowHandle : driver.getWindowHandles()) {
-            if(!originalWindow.contentEquals(windowHandle)) {
-                driver.switchTo().window(windowHandle);
-                break;
-            }
+        String lastTab = driver.getWindowHandle();
+        Set<String> allTabs = driver.getWindowHandles();
+        Iterator<String> iterator = allTabs.iterator();
+        while (iterator.hasNext()) {
+            lastTab = iterator.next();
         }
+        driver.switchTo().window(lastTab);
     }
 
 }

@@ -1,6 +1,6 @@
 import jdk.jfr.Description;
+import org.example.BasePage;
 import org.example.HomePage;
-import org.example.LoginPage;
 import org.example.ProductDetailPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -9,22 +9,23 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 import static util.Constants.HOME_PAGE_URL;
-import static util.Constants.LOGIN_PAGE_URL;
 
 public class HomePageTest extends BasePageTest{
+
+    BasePage basePage;
     HomePage homePage;
     ProductDetailPage productDetailPage;
-
-    LoginPage loginPage;
 
     @BeforeTest
     public void before() {
         super.before();
         homePage = goToUrl(new HomePage(driver, wait), HOME_PAGE_URL);
+        basePage = new BasePage(driver, wait);
+        basePage.closeCookieWindow();
     }
 
     @Description("Case-1: The product is selected, go to the product detail page and then click thumbsUp on the comments of the selected product. The incoming message is checked.")
-    @Test
+    @Test(priority = 1)
     public void searchProductAndGo() {
         homePage.searchProductAndGoProductDetailPage("iphone");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -35,12 +36,8 @@ public class HomePageTest extends BasePageTest{
     }
 
     @Description("Case-2 : The product is selected, go to the product detail page and then click Like button and check.")
-    @Test
+    @Test(priority = 2)
     public void checkProductLikeButton() {
-        loginPage = goToUrl(new LoginPage(driver, wait), LOGIN_PAGE_URL);
-        loginPage.login();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         homePage.searchProductAndGoProductDetailPage("iphone");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 

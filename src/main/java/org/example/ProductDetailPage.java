@@ -75,7 +75,6 @@ public class ProductDetailPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(likeButtonClassName));
         WebElement likeButton = driver.findElement(likeButtonClassName);
         actions.scrollToElement(likeButton).perform();
-        likeButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(likeButtonClassName));
         if (likeButton.getText().equals("Beğen")) {
             likeButton.click();

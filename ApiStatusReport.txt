@@ -1,0 +1,2 @@
+Api POST Response : {"id":"65c2ece3e5e1b8817ba7dc86","idBoard":"65c2e38709ed9eed3c76c5d0","name":"Merve Test Post","color":"red","uses":0,"limits":{}} Api POST Status : 200 BAŞARILI 07/02/2024 14:34:46 
+Api GET Response : [{"unconfirmed":false,"idMember":"6231ce9e5b57a3869486bd9a","memberType":"admin","id":"65c2e38709ed9eed3c76c5db","deactivated":false}] Api GET Status : 200 BAŞARILI 07/02/2024 14:34:46 
